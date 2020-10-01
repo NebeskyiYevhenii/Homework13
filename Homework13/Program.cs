@@ -11,59 +11,77 @@ namespace Homework13
     {
         static void Main(string[] args)
         {
-           // Console.ReadKey();
-        }
-    }
 
+            Queue<string> linkedList = new Queue<string>();
+            // добавление элементов
+            linkedList.AddToEnd("Tom");
+            linkedList.AddToEnd("Alice");
+            linkedList.AddToEnd("Bob");
+            linkedList.AddToEnd("Sam");
 
-    public class QueueItem<T>
-    {
-        public T Data { get; set; }
-        public QueueItem<T> Next { get; set; }
-
-        public QueueItem(T data)
-        {
-            Data = data;
-        }
-    }
-
-    public class Queue<T> : IEnumerable<T>  // односвязный список
-    {
-        QueueItem<T> head; // головной/первый элемент
-        QueueItem<T> tail; // последний/хвостовой элемент
-        int count;  // количество элементов в списке
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            QueueItem<T> current = head;
-            while (current != null)
+            // выводим элементы
+            foreach (var item in linkedList)
             {
-                yield return current.Data;
-                current = current.Next;
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)this).GetEnumerator();
-        }
-
-        public void AddItem(T data)
-        {
-            QueueItem<T> queueItem = new QueueItem<T>(data);
-
-            if (head == null)
-            {
-                head = queueItem;
-            }  
-            else
-            {
-                tail.Next = queueItem;
+                Console.WriteLine(item);
             }
 
-            tail = queueItem;
-            count++;
-        }
+            // удаляем элемент
+            linkedList.Delete("Alice");
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine("Delete \"Alice\"");
+            foreach (var item in linkedList)
+            {
+                Console.WriteLine(item);
+            }
 
+            // проверяем наличие элемента
+            bool isPresent = linkedList.Contains("Sam");
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine("проверяем наличие элемента \"Sam\"");
+            Console.WriteLine(isPresent == true ? "Sam присутствует" : "Sam отсутствует");
+
+            // проверяем наличие элемента
+            isPresent = linkedList.Contains("Bill!!!!");
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine("проверяем наличие элемента \"Bill!!!!\"");
+            Console.WriteLine(isPresent == true ? "Sam присутствует" : "Sam отсутствует");
+
+            // добавляем элемент в начало            
+            linkedList.AddToStart("Bill");
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine("добавляем элемент в начало  \"Bill\"");
+            foreach (var item in linkedList)
+            {
+                Console.WriteLine(item);
+            }
+
+            // добавляем элемент в конец            
+            linkedList.AddToEnd("Bill!!!!");
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine("добавляем элемент в конец  \"Bill!!!!\"");
+            foreach (var item in linkedList)
+            {
+                Console.WriteLine(item);
+            }
+
+            // добавляем элемент в индекс 3            
+            linkedList.AddByIndex("Bill??????",3);
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine("добавляем элемент в индекс 3  \"Bill??????\"");
+            foreach (var item in linkedList)
+            {
+                Console.WriteLine(item);
+            }
+
+            // получаем 3 элемент
+            //isPresent = linkedList.Contains("Bill!!!!");
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine("получаем 3 элемент");
+            Console.WriteLine(linkedList[3].Data);
+
+
+
+            Console.ReadKey();
+        }
     }
 }
